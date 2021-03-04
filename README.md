@@ -16,7 +16,8 @@ Scenes - just scenes, if you want to try something your own, just create one in 
 Scripts - all scripts me and laura coded
 
 Settings - I don't know what is that, so I did not touch it
-----------------------------------------
+
 Next time when you add something in the project, try to put them in their own sorting folder.
+----------------------------------------
 
 20210304
