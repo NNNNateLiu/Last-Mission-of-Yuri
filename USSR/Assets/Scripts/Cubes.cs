@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Cubes : MonoBehaviour
 {
+    //variable that determine if something is inside collider
     public bool isCatched = false;
-    private void OnTriggerStay(Collider other)
+    
+    // Called once per physics update for every collider touching the trigger
+    private void OnTriggerStay(Collider other) 
     {
-        if (other.tag == "catching")
-        {
-            isCatched = true;
+        if (other.tag == "catching")        //if the other collider has the catching tag
+        {      
+            isCatched = true;               //set isCatched as true
         }
     }
 }
