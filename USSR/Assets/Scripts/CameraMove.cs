@@ -23,7 +23,7 @@ public class CameraMove : MonoBehaviour {
     private float rotationY = 0F;
  
     void Update ()
-    {
+    {   // Determine limits of camera
         if (axes == RotationAxes.MouseXAndY)
         {
             float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;

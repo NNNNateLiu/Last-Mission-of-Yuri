@@ -2,6 +2,7 @@
 
 public class GravityPlane : GravitySource {
 
+	//fuerza de gravedad que atraen al jugador, piensa en a pull force
 	[SerializeField]
 	float gravity = 9.81f;
 

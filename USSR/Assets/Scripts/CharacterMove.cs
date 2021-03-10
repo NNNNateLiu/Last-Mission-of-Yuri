@@ -5,61 +5,43 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour {
 
+	//variables to control de sensitivity of the mouse movement
 	public float mouseSensitivityX = 1.0f;
 	public float mouseSensitivityY = 1.0f;
 
+	// variables to control the movement of the player
 	public float walkSpeed = 10.0f;
 	Vector3 moveAmount;
 	Vector3 smoothMoveVelocity;
 
+	// variables to control the camera
 	Transform cameraT;
 	float verticalLookRotation;
 
-	Rigidbody rigidbodyR;
-
-	float jumpForce = 250.0f;
-	bool grounded;
-	public LayerMask groundedMask;
-
-	bool cursorVisible;
+	Rigidbody rigidbodyR;		//variable to store the rigidbody
+	
+	bool cursorVisible;			//variable to modify the curse 
 
 	// Use this for initialization
 	void Start () {
-		cameraT = Camera.main.transform;
-		rigidbodyR = GetComponent<Rigidbody> ();
-		LockMouse ();
+		cameraT = Camera.main.transform;			
+		rigidbodyR = GetComponent<Rigidbody> ();	//get the rigidbody component
+		LockMouse ();								//lock mouse at the center
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		// rotation
+		// Move camera depending on the the mouse position
 		transform.Rotate (Vector3.up * Input.GetAxis ("Mouse X") * mouseSensitivityX);
 		verticalLookRotation += Input.GetAxis ("Mouse Y") * mouseSensitivityY;
 		verticalLookRotation = Mathf.Clamp (verticalLookRotation, -60, 60);
-		cameraT.localEulerAngles = Vector3.left * verticalLookRotation;
+		cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
 
-		// movement
+		// Control the movement of the player, direction and speed
 		Vector3 moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
 		Vector3 targetMoveAmount = moveDir * walkSpeed;
 		moveAmount = Vector3.SmoothDamp (moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
-
-		// jump
-		if (Input.GetButtonDown ("Jump")) {
-			if (grounded) {
-				rigidbodyR.AddForce (transform.up * jumpForce);
-			}
-		}
-
-		Ray ray = new Ray (transform.position, -transform.up);
-		RaycastHit hit;
-
-		if (Physics.Raycast(ray, out hit, 1 + .1f, groundedMask)) {
-			grounded = true;
-		}
-		else {
-			grounded = false;
-		}
-
+		
 		/* Lock/unlock mouse on click */
 		if (Input.GetMouseButtonUp (0)) {
 			if (!cursorVisible) {
@@ -74,22 +56,22 @@ public class CharacterMove : MonoBehaviour {
 		rigidbodyR.MovePosition (rigidbodyR.position + transform.TransformDirection (moveAmount) * Time.fixedDeltaTime);
 	}
 
+	//Unlock mouse and make it visible
 	void UnlockMouse() {
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 		cursorVisible = true;
 	}
-
+	//Lock mouse and make it invisible
 	void LockMouse() {
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 		cursorVisible = false;
 	}
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "cube")
-		{
+	// Code to prevent weird rotation when everything else is moving by having it move with the other object
+	private void OnTriggerEnter(Collider other) {
+		if (other.tag == "cube") {
 			gameObject.transform.SetParent(other.gameObject.transform);
 		}
 	}

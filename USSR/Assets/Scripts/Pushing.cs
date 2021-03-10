@@ -7,16 +7,15 @@ using UnityEngine;
 public class Pushing : MonoBehaviour
 {
     // the gameobject which hold catching collider
-
-    
-    // 
     public Transform rotatePivot;
-    public List<GameObject> catchedCubes;
-    public List<GameObject> allCubes;
     public GameObject player;
     public float xRotateAngles;
     public float yRotateAngles;
     public float zRotateAngles;
+
+    //Create list to group up the active cubes
+    public List<GameObject> catchedCubes;
+    public List<GameObject> allCubes;
 
     // variables to determine who the object is going to be modified
     public float xRotateModifyer;
@@ -85,12 +84,6 @@ public class Pushing : MonoBehaviour
 
     public void PushCaughtCubes()
     {
-        /*
-        xRotateAngles += xRotateModifyer;
-        yRotateAngles += yRotateModifyer;
-        zRotateAngles += zRotateModifyer;
-        */
-        
         Debug.Log(xRotateAngles + " " + yRotateAngles + " " + zRotateAngles);
         foreach (var cube in catchedCubes)          //run for each cube in the catchedCubes list
         {
@@ -110,7 +103,7 @@ public class Pushing : MonoBehaviour
         catchedCubes.Clear();               //empty the catchedCubes list
     }
     private void Update()
-    {
+    {   //Debug stuff
         Vector3 temp = rotatePivot.eulerAngles;
         xRotateAngles = temp.x;
         yRotateAngles = temp.y;
@@ -122,14 +115,3 @@ public class Pushing : MonoBehaviour
         isRotate = false;
     }
 }
-
-/*
-
-outerwall - Y axis 
-    outer green - clockwise
-    outer red - clockwise
-innerwall - X asis 
-    inner red - clockwise
-    inner green - anti
-
-*/
