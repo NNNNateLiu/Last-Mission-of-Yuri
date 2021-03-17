@@ -75,5 +75,21 @@ public class CharacterMove : MonoBehaviour {
 			gameObject.transform.SetParent(other.gameObject.transform);
 		}
 	}
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "stair")
+        {
+			walkSpeed = 10;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+		if (other.gameObject.tag == "stair")
+		{
+			walkSpeed = 5;
+		}
+	}
 }
 

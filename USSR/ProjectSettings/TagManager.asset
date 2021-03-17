@@ -7,6 +7,7 @@ TagManager:
   - ground
   - cube
   - catching
+  - stair
   layers:
   - Default
   - TransparentFX
