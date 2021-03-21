@@ -20,7 +20,9 @@ public class CharacterMove : MonoBehaviour {
 
 	Rigidbody rigidbodyR;		//variable to store the rigidbody
 	
-	bool cursorVisible;			//variable to modify the curse 
+	bool cursorVisible;         //variable to modify the curse 
+
+	public bool isSetCubeAsParent; //level2: variable to decide whether player rotate with Cube
 
 	// Use this for initialization
 	void Start () {
@@ -71,8 +73,12 @@ public class CharacterMove : MonoBehaviour {
 
 	// Code to prevent weird rotation when everything else is moving by having it move with the other object
 	private void OnTriggerEnter(Collider other) {
-		if (other.tag == "cube") {
-			gameObject.transform.SetParent(other.gameObject.transform);
+		if(isSetCubeAsParent)
+        {
+			if (other.tag == "cube")
+			{
+				gameObject.transform.SetParent(other.gameObject.transform);
+			}
 		}
 	}
 
