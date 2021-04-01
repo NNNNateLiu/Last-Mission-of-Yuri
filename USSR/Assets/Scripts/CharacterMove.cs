@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour {
 
+	public static CharacterMove instance;
 	//variables to control de sensitivity of the mouse movement
 	public float mouseSensitivityX = 1.0f;
 	public float mouseSensitivityY = 1.0f;
@@ -24,8 +25,12 @@ public class CharacterMove : MonoBehaviour {
 
 	public bool isSetCubeAsParent; //level2: variable to decide whether player rotate with Cube
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+		instance = this;
+    }
+    // Use this for initialization
+    void Start () {
 		cameraT = Camera.main.transform;			
 		rigidbodyR = GetComponent<Rigidbody> ();	//get the rigidbody component
 		LockMouse ();								//lock mouse at the center
@@ -33,11 +38,19 @@ public class CharacterMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Move camera depending on the the mouse position
-		transform.Rotate (Vector3.up * Input.GetAxis ("Mouse X") * mouseSensitivityX);
-		verticalLookRotation += Input.GetAxis ("Mouse Y") * mouseSensitivityY;
-		verticalLookRotation = Mathf.Clamp (verticalLookRotation, -60, 60);
-		cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
+		if(!RadioController.instance.isFocusing)
+        {
+			// Move camera depending on the the mouse position
+			transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
+			verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+			verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
+			cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
+		}
+		else
+		{
+			cameraT.eulerAngles = Vector3.zero;
+		}
+		
 
 		// Control the movement of the player, direction and speed
 		Vector3 moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
@@ -86,7 +99,7 @@ public class CharacterMove : MonoBehaviour {
     {
         if(other.gameObject.tag == "stair")
         {
-			walkSpeed = 10;
+			walkSpeed = 15;
         }
     }
 
@@ -94,7 +107,7 @@ public class CharacterMove : MonoBehaviour {
     {
 		if (other.gameObject.tag == "stair")
 		{
-			walkSpeed = 5;
+			walkSpeed = 10;
 		}
 	}
 }
