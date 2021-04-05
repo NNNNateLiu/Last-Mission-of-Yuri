@@ -12,7 +12,8 @@ public class UI : MonoBehaviour
     Vector3 position1=new Vector3(350,0,0);
     Vector3 position2=new Vector3(0,0,0);
     private Vector3 velocity = Vector3.zero;
-    
+    public RectTransform panelRectTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,5 +46,8 @@ public class UI : MonoBehaviour
     public void endmenu(){
          RectTransform mytransform=GetComponent<RectTransform>();
         mytransform.anchoredPosition=Vector3.SmoothDamp(position1,position2,ref velocity,Time.deltaTime*0.001f);}
+    public void setparents(){
+         panelRectTransform.SetAsLastSibling();
+    }
 }
 
