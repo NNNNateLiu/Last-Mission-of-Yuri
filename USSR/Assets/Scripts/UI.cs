@@ -9,6 +9,10 @@ public class UI : MonoBehaviour
     public Animator TurnPage;
     public GameObject theButton1;
     public GameObject theButton2;
+    Vector3 position1=new Vector3(350,0,0);
+    Vector3 position2=new Vector3(0,0,0);
+    private Vector3 velocity = Vector3.zero;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,12 @@ public class UI : MonoBehaviour
         theButton1.SetActive(false);
         theButton2.SetActive(true);
     }
+    public void startmenu(){
+        
+        RectTransform mytransform=GetComponent<RectTransform>();
+        mytransform.anchoredPosition=Vector3.SmoothDamp(position2,position1,ref velocity,Time.deltaTime*0.001f);}
+    public void endmenu(){
+         RectTransform mytransform=GetComponent<RectTransform>();
+        mytransform.anchoredPosition=Vector3.SmoothDamp(position1,position2,ref velocity,Time.deltaTime*0.001f);}
 }
-
 
