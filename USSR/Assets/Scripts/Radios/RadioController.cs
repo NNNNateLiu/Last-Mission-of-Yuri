@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RadioController : MonoBehaviour
 {
@@ -13,13 +14,18 @@ public class RadioController : MonoBehaviour
 
     //matches that play music
     public List<string> combos;
-    //three number panel
-    public List<GameObject> numbers;
+    public List<AudioClip> music;
+    public List<string> titles;
+    public List<int> numbers;
+    public string currentCombo;
 
-    public GameObject currentContrillingNumber;
+    public int currentContrillingNumber = 0;
     public bool isFocusing;
 
     private Vector3 standardRotate;
+    private AudioSource maudio;
+
+    public Text panel;
 
     private void Awake()
     {
@@ -29,6 +35,7 @@ public class RadioController : MonoBehaviour
     void Start()
     {
         playerRigidbody = player.GetComponent<Rigidbody>();
+        maudio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,7 +44,62 @@ public class RadioController : MonoBehaviour
         if (isFocusing)
         {
             playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                numbers[currentContrillingNumber]++;
+                if(numbers[currentContrillingNumber] > 9)
+                {
+                    numbers[currentContrillingNumber] = 0;
+                }
+                currentCombo = numbers[0].ToString() + numbers[1].ToString() + numbers[2].ToString();
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                numbers[currentContrillingNumber]--;
+                if (numbers[currentContrillingNumber] < 0)
+                {
+                    numbers[currentContrillingNumber] = 9;
+                }
+                currentCombo = numbers[0].ToString() + numbers[1].ToString() + numbers[2].ToString();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                currentContrillingNumber--;
+                if(currentContrillingNumber < 0)
+                {
+                    currentContrillingNumber = 2;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                currentContrillingNumber++;
+                if (currentContrillingNumber > 2)
+                {
+                    currentContrillingNumber = 0;
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("play");
+                for(var i = 0; i < combos.Count; i++ )
+                {
+                    if (combos[i] == currentCombo)
+                    {
+                        maudio.clip = music[i];
+                        maudio.Play();
+                        panel.text = titles[i];
+                        break;
+                    }
+                }
+            }
+
         }
+
     }
 
 
@@ -79,5 +141,15 @@ public class RadioController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void NumberSwitchUp(int currentNumber)
+    {
+        numbers[currentNumber]++;
+    }
+
+    public void NumberSwitchDwon(int currentNumber)
+    {
+        numbers[currentNumber]--;
     }
 }
