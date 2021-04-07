@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour {
 
+	public static CharacterMove instance;
 	//variables to control de sensitivity of the mouse movement
 	public float mouseSensitivityX = 1.0f;
 	public float mouseSensitivityY = 1.0f;
@@ -20,10 +21,16 @@ public class CharacterMove : MonoBehaviour {
 
 	Rigidbody rigidbodyR;		//variable to store the rigidbody
 	
-	bool cursorVisible;			//variable to modify the curse 
+	bool cursorVisible;         //variable to modify the curse 
 
-	// Use this for initialization
-	void Start () {
+	public bool isSetCubeAsParent; //level2: variable to decide whether player rotate with Cube
+
+    private void Awake()
+    {
+		instance = this;
+    }
+    // Use this for initialization
+    void Start () {
 		cameraT = Camera.main.transform;			
 		rigidbodyR = GetComponent<Rigidbody> ();	//get the rigidbody component
 		LockMouse ();								//lock mouse at the center
@@ -31,11 +38,19 @@ public class CharacterMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Move camera depending on the the mouse position
-		transform.Rotate (Vector3.up * Input.GetAxis ("Mouse X") * mouseSensitivityX);
-		verticalLookRotation += Input.GetAxis ("Mouse Y") * mouseSensitivityY;
-		verticalLookRotation = Mathf.Clamp (verticalLookRotation, -60, 60);
-		cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
+		if(!RadioController.instance.isFocusing)
+        {
+			// Move camera depending on the the mouse position
+			transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
+			verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+			verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
+			cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
+		}
+		else
+		{
+			cameraT.eulerAngles = Vector3.zero;
+		}
+		
 
 		// Control the movement of the player, direction and speed
 		Vector3 moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
@@ -71,8 +86,28 @@ public class CharacterMove : MonoBehaviour {
 
 	// Code to prevent weird rotation when everything else is moving by having it move with the other object
 	private void OnTriggerEnter(Collider other) {
-		if (other.tag == "cube") {
-			gameObject.transform.SetParent(other.gameObject.transform);
+		if(isSetCubeAsParent)
+        {
+			if (other.tag == "cube")
+			{
+				gameObject.transform.SetParent(other.gameObject.transform);
+			}
+		}
+	}
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "stair")
+        {
+			walkSpeed = 15;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+		if (other.gameObject.tag == "stair")
+		{
+			walkSpeed = 10;
 		}
 	}
 }

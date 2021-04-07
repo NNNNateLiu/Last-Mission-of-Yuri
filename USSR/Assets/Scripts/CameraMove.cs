@@ -6,6 +6,8 @@ public enum RotationAxes {
     MouseXAndY = 0, MouseX = 1, MouseY = 2 
 }
 public class CameraMove : MonoBehaviour {
+
+    public static CameraMove instance;
     //x轴（水平）速度
     public float sensitivityX = 15F;
     //y轴（垂直）速度
@@ -21,7 +23,11 @@ public class CameraMove : MonoBehaviour {
     //旋转轴
     public RotationAxes axes = RotationAxes.MouseXAndY;
     private float rotationY = 0F;
- 
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Update ()
     {   // Determine limits of camera
         if (axes == RotationAxes.MouseXAndY)

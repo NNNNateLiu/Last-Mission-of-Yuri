@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Pushing : MonoBehaviour
 {
+    //Hotfix after Dylan destroy our game: add a cold down for each push
+    private float pushWaitTime = 1;
+    private float pushTimer = 0;
+    public bool canPush;
+
     // the gameobject which hold catching collider
     public Transform rotatePivot;
     public GameObject player;
@@ -59,7 +64,7 @@ public class Pushing : MonoBehaviour
         {
             //catching.SetActive(true);
             //Debug.Log("player enter and catch");
-            if (Input.GetKeyDown(KeyCode.T))                //and when the T key is pressed
+            if (Input.GetKeyDown(KeyCode.T) && canPush)                //and when the T key is pressed
             {
                 //GetCatchedCubes();
                 Debug.Log("start to push");
@@ -84,6 +89,7 @@ public class Pushing : MonoBehaviour
 
     public void PushCaughtCubes()
     {
+        canPush = false;
         Debug.Log(xRotateAngles + " " + yRotateAngles + " " + zRotateAngles);
         foreach (var cube in catchedCubes)          //run for each cube in the catchedCubes list
         {
@@ -108,6 +114,16 @@ public class Pushing : MonoBehaviour
         xRotateAngles = temp.x;
         yRotateAngles = temp.y;
         zRotateAngles = temp.z;
+
+        if(!canPush)
+        {
+            pushTimer += Time.deltaTime;
+            if(pushTimer >= pushWaitTime)
+            {
+                canPush = true;
+                pushTimer = 0;
+            }
+        }
     }
 
     public void SetIsRotate()
