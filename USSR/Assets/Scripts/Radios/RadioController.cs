@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class RadioController : MonoBehaviour
 {
@@ -12,13 +11,6 @@ public class RadioController : MonoBehaviour
     public GameObject player;
     public GameObject playerCam;
     public Transform camPoint;
-
-    public GameObject pointer;
-    private float pointerChangeValue;
-    private float currentPointerValue = -50f;
-    private float pointerColdDown = 1f;
-    private float pointerTimer;
-    public bool canPlay;
 
     //matches that play music
     public List<string> combos;
@@ -91,13 +83,8 @@ public class RadioController : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.P) && canPlay)
+            if(Input.GetKeyDown(KeyCode.P))
             {
-                int currentComboNumber = int.Parse(currentCombo);
-                pointerChangeValue = (80 * currentComboNumber) / 1000;
-                currentPointerValue = -50 - pointerChangeValue;
-                pointer.transform.DOLocalRotate(new Vector3(0, 0, currentPointerValue), 1, RotateMode.Fast);
-
                 Debug.Log("play");
                 for(var i = 0; i < combos.Count; i++ )
                 {
