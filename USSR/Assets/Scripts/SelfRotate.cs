@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// I dont think we are using this
+
 public class SelfRotate : MonoBehaviour
 {
     public float rotateSpeed = 2f;

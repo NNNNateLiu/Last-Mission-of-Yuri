@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// used on player both level
+
 public class CharacterMove : MonoBehaviour {
 
 	public static CharacterMove instance;
-	//variables to control de sensitivity of the mouse movement
+	
+	//variables to control de sensitivity of the mouse movement; also the question if "if same number why two values
 	public float mouseSensitivityX = 1.0f;
 	public float mouseSensitivityY = 1.0f;
 
@@ -25,39 +28,36 @@ public class CharacterMove : MonoBehaviour {
 
 	public bool isSetCubeAsParent; //level2: variable to decide whether player rotate with Cube
 
-    private void Awake()
-    {
-		instance = this;
+    private void Awake() {
+		instance = this;	//same questions as to why we need this
     }
     // Use this for initialization
     void Start () {
-		cameraT = Camera.main.transform;			
-		rigidbodyR = GetComponent<Rigidbody> ();	//get the rigidbody component
-		LockMouse ();								//lock mouse at the center
+		cameraT = Camera.main.transform;			//store the camara transform
+		rigidbodyR = GetComponent<Rigidbody> ();	//get the rigidbody component of the object
+		LockMouse ();								// run the LockMouse function
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!RadioController.instance.isFocusing)
-        {
+		if(!RadioController.instance.isFocusing) {	//when not using the radio
 			// Move camera depending on the the mouse position
 			transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
 			verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
 			verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
 			cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
 		}
-		else
-		{
-			cameraT.eulerAngles = Vector3.zero;
+		
+		else {	//when using the radio
+			cameraT.eulerAngles = Vector3.zero; //set the camara to look at the front of the radio and not move 
 		}
 		
-
 		// Control the movement of the player, direction and speed
 		Vector3 moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
 		Vector3 targetMoveAmount = moveDir * walkSpeed;
 		moveAmount = Vector3.SmoothDamp (moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 		
-		/* Lock/unlock mouse on click */
+		// run the Lock/unlock mouse function on click
 		if (Input.GetMouseButtonUp (0)) {
 			if (!cursorVisible) {
 				UnlockMouse ();
@@ -67,6 +67,7 @@ public class CharacterMove : MonoBehaviour {
 		}
 	}
 
+	// update the rigidbody to move as you are giving input of movement
 	void FixedUpdate() {
 		rigidbodyR.MovePosition (rigidbodyR.position + transform.TransformDirection (moveAmount) * Time.fixedDeltaTime);
 	}
@@ -86,28 +87,22 @@ public class CharacterMove : MonoBehaviour {
 
 	// Code to prevent weird rotation when everything else is moving by having it move with the other object
 	private void OnTriggerEnter(Collider other) {
-		if(isSetCubeAsParent)
-        {
-			if (other.tag == "cube")
-			{
-				gameObject.transform.SetParent(other.gameObject.transform);
+		if(isSetCubeAsParent) {
+			if (other.tag == "cube") {
+				gameObject.transform.SetParent(other.gameObject.transform); //set the cube as parent of this object so it will rotate with it
 			}
 		}
 	}
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.gameObject.tag == "stair")
-        {
-			walkSpeed = 15;
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.tag == "stair") {	//when using stairs
+			walkSpeed = 15;						//make speed faster so that is not so hard going up the stairs
         }
     }
 
-    private void OnCollisionExit(Collision other)
-    {
-		if (other.gameObject.tag == "stair")
-		{
-			walkSpeed = 10;
+    private void OnCollisionExit(Collision other) {
+		if (other.gameObject.tag == "stair") {	//when done with stairs 
+			walkSpeed = 10;						//reset speed
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+//used on both scene
 public class Pushing : MonoBehaviour
 {
     //Hotfix after Dylan destroy our game: add a cold down for each push
@@ -80,8 +81,7 @@ public class Pushing : MonoBehaviour
         foreach (var cube in allCubes)             //run foreach cube in the allCubes list
         {
             bool isCatched = cube.GetComponent<Cubes>().isCatched; //get the boolean value from the cube script
-            if (isCatched)                                   //if boolean true
-            {
+            if (isCatched) {                                  //if boolean true
                 catchedCubes.Add(cube);                      //add the cube to the list of catchedCubes
             }
         }
@@ -91,8 +91,7 @@ public class Pushing : MonoBehaviour
     {
         canPush = false;
         Debug.Log(xRotateAngles + " " + yRotateAngles + " " + zRotateAngles);
-        foreach (var cube in catchedCubes)          //run for each cube in the catchedCubes list
-        {
+        foreach (var cube in catchedCubes) {          //run for each cube in the catchedCubes list
             cube.transform.SetParent(rotatePivot);             //set another transform as their parent 
         }
         //rotate the object
@@ -104,30 +103,27 @@ public class Pushing : MonoBehaviour
         isRotate = true;    //set the object as rotated
     }
 
-    public void ReleaseCaughtCubes()
-    {
+    public void ReleaseCaughtCubes() {
         catchedCubes.Clear();               //empty the catchedCubes list
     }
-    private void Update()
-    {   //Debug stuff
+    private void Update() { 
+        //Debug stuff
         Vector3 temp = rotatePivot.eulerAngles;
         xRotateAngles = temp.x;
         yRotateAngles = temp.y;
         zRotateAngles = temp.z;
 
-        if(!canPush)
-        {
+        if(!canPush) {
             pushTimer += Time.deltaTime;
-            if(pushTimer >= pushWaitTime)
-            {
+            if(pushTimer >= pushWaitTime) {
                 canPush = true;
                 pushTimer = 0;
             }
         }
     }
 
-    public void SetIsRotate()
-    {
+    //this is not being used
+    public void SetIsRotate() {
         isRotate = false;
     }
 }

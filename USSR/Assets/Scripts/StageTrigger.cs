@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+// I dont think we are using this
 public class StageTrigger : MonoBehaviour
 {
     public Material feedback;
