@@ -21133,8 +21133,6 @@ MonoBehaviour:
   player: {fileID: 560343495}
   playerCam: {fileID: 400393992}
   camPoint: {fileID: 762450988}
-  pointer: {fileID: 2022147836}
-  canPlay: 1
   combos:
   - 111
   - 222
