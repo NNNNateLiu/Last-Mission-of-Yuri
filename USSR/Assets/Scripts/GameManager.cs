@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-    // i dont think we are using this script
+    // rubic's cube level, rotate gravity field to make player stand on other walls(?)
 public class GameManager : MonoBehaviour
 {
     public GameObject gravitySource;

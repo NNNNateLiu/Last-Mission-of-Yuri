@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//are we going to use this?
+// yangying's ui code
 public class UI : MonoBehaviour
 
 {

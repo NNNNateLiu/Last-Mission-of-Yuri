@@ -10,19 +10,14 @@ public class Bridge : MonoBehaviour
     public GameObject bridge1;
     public GameObject bridge2;
     
-    
     public string connectionTag;
-
-    public bool isConnected;        //this is also not used, for this one I think is about what it mean for all the bridges to be in place 
-
+    
     // When activating a trigger
     private void OnTriggerEnter(Collider other) {
         Debug.Log(other.tag);
         if( other.tag == connectionTag) {           //when the yellow lines line up
             LiftBridge();                           //run the LiftBridge function
         }
-
-        //pushing.GetComponent<Pushing>().canPush &&    <- this is commented out can we take it out?
     }
 
     // When exiting a trigger

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-// I dont think we are using this
+// temp code for testing purpose... allows teleport
 public class StageTrigger : MonoBehaviour
 {
     public Material feedback;

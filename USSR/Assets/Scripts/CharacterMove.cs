@@ -7,11 +7,10 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour {
 
-	public static CharacterMove instance;
+	public static CharacterMove instance; //create an instance that is going to be used in another script
 	
-	//variables to control de sensitivity of the mouse movement; also the question if "if same number why two values
-	public float mouseSensitivityX = 1.0f;
-	public float mouseSensitivityY = 1.0f;
+	//variables to control de sensitivity of the mouse movement
+	public float mouseSensitivity = 1.0f;
 
 	// variables to control the movement of the player
 	public float walkSpeed = 10.0f;
@@ -29,7 +28,7 @@ public class CharacterMove : MonoBehaviour {
 	public bool isSetCubeAsParent; //level2: variable to decide whether player rotate with Cube
 
     private void Awake() {
-		instance = this;	//same questions as to why we need this
+		instance = this;	//make this objects the instance
     }
     // Use this for initialization
     void Start () {
@@ -42,8 +41,8 @@ public class CharacterMove : MonoBehaviour {
 	void Update () {
 		if(!RadioController.instance.isFocusing) {	//when not using the radio
 			// Move camera depending on the the mouse position
-			transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
-			verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+			transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivity);
+			verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivity;
 			verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
 			cameraT.localEulerAngles = Vector3.left * verticalLookRotation; //make sures that the player is moving according to the camera
 		}
