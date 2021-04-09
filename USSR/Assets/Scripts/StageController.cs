@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// I dont think we are using this, but think i understand the purpose but not sure here
 public class StageController : MonoBehaviour
 {
     public static StageController instance;
