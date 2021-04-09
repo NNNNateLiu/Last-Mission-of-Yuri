@@ -11,7 +11,6 @@ public class Bridge : MonoBehaviour
     public GameObject bridge2;
     
     
-    public GameObject pushing;      //this is not being used, but I assume if for pushing the walls
     public string connectionTag;
 
     public bool isConnected;        //this is also not used, for this one I think is about what it mean for all the bridges to be in place 
