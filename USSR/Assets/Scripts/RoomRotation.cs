@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// I dont think we are using this
+// rubic'cube and maybe for something that yuanfan is working on
 
 public class RoomRotation : MonoBehaviour
 {

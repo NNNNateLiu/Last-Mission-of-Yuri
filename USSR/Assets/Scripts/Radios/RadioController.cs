@@ -19,7 +19,7 @@ public class RadioController : MonoBehaviour
     public List<int> numbers;
     public string currentCombo;
 
-    public int currentContrillingNumber = 0;
+    public int currentControllingNumber = 0;
     public bool isFocusing;
 
     private Vector3 standardRotate;
@@ -40,53 +40,55 @@ public class RadioController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (isFocusing)
+    {   //control the radio
+        if (isFocusing) //when using the radio
         {
-            playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f); //camara lock to radio
 
-            if(Input.GetKeyDown(KeyCode.UpArrow))
+            if(Input.GetKeyDown(KeyCode.UpArrow)) //after pressing the up arrow key 
             {
-                numbers[currentContrillingNumber]++;
-                if(numbers[currentContrillingNumber] > 9)
+                numbers[currentControllingNumber]++;        //add one to the current number
+                if(numbers[currentControllingNumber] > 9)   //if number bigger than 9
                 {
-                    numbers[currentContrillingNumber] = 0;
+                    numbers[currentControllingNumber] = 0;  //change number to 0
                 }
-                currentCombo = numbers[0].ToString() + numbers[1].ToString() + numbers[2].ToString();
+                currentCombo = numbers[0].ToString() + numbers[1].ToString() + numbers[2].ToString(); //update the combo
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.DownArrow)) //after pressing the down arrow  key 
             {
-                numbers[currentContrillingNumber]--;
-                if (numbers[currentContrillingNumber] < 0)
+                numbers[currentControllingNumber]--;        //substract one to the current number
+                if (numbers[currentControllingNumber] < 0)   //if number lesser than 0
                 {
-                    numbers[currentContrillingNumber] = 9;
+                    numbers[currentControllingNumber] = 9;       //change number to 9
                 }
-                currentCombo = numbers[0].ToString() + numbers[1].ToString() + numbers[2].ToString();
+                currentCombo = numbers[0].ToString() + numbers[1].ToString() + numbers[2].ToString();//update the combo
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))    //after pressing left arrow key
             {
-                currentContrillingNumber--;
-                if(currentContrillingNumber < 0)
+                currentControllingNumber--;             //select the number on the left slot of current selected number
+                if(currentControllingNumber < 0)        //if you are on the far left 
                 {
-                    currentContrillingNumber = 2;
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                currentContrillingNumber++;
-                if (currentContrillingNumber > 2)
-                {
-                    currentContrillingNumber = 0;
+                    currentControllingNumber = 2;       //select the far right slot
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.RightArrow))    //after pressing right arrow key
+            {
+                currentControllingNumber++;              //select the number on the right slot of current selected number
+                if (currentControllingNumber > 2)        //if you are on the far right 
+                {
+                    currentControllingNumber = 0;       //select the far left slot
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.P))             //after pressing p
             {
                 Debug.Log("play");
-                for(var i = 0; i < combos.Count; i++ )
+                
+                //check the string and play the music or recording depending on the string
+                for(var i = 0; i < combos.Count; i++ )  
                 {
                     if (combos[i] == currentCombo)
                     {
@@ -103,6 +105,8 @@ public class RadioController : MonoBehaviour
     }
 
 
+    //it does something related to determining if the player is focusing or not on the radio and how the camera acts in both posibilies
+    //my brain hurts from trying to fully understand this
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
@@ -121,8 +125,8 @@ public class RadioController : MonoBehaviour
                     playerCam.transform.localPosition = Vector3.zero;
                     playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                     CharacterMove.instance.walkSpeed = 10;
-                    CharacterMove.instance.mouseSensitivityX = 1;
-                    CharacterMove.instance.mouseSensitivityY = 1;
+                    CharacterMove.instance.mouseSensitivity = 1;
+
 
                     playerRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                     isFocusing = false;
@@ -133,23 +137,12 @@ public class RadioController : MonoBehaviour
                     playerCam.transform.position = camPoint.position;
                     playerCam.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                     CharacterMove.instance.walkSpeed = 0;
-                    CharacterMove.instance.mouseSensitivityX = 0;
-                    CharacterMove.instance.mouseSensitivityY = 0;
+                    CharacterMove.instance.mouseSensitivity = 0;
 
                     playerRigidbody.constraints = RigidbodyConstraints.FreezeAll;
                     isFocusing = true;
                 }
             }
         }
-    }
-
-    public void NumberSwitchUp(int currentNumber)
-    {
-        numbers[currentNumber]++;
-    }
-
-    public void NumberSwitchDwon(int currentNumber)
-    {
-        numbers[currentNumber]--;
     }
 }

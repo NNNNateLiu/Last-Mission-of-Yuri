@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// I dont think we are using this
+// yuanfan's code for something
 
 public class SelfRotate : MonoBehaviour
 {

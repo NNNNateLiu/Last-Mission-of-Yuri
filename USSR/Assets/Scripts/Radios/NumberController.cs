@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//radio codes for all levels with at least a radio
 public class NumberController : MonoBehaviour
 {
-    public GameObject radio;
-    public string shownNumber;
-    public int numberOrder;
-    public Text mtext;
+    public GameObject radio;    //variable fot the radio object
+    public int numberOrder;     //variable for the digits
+    public Text mtext;          //variable to control the text
 
     // Update is called once per frame
     void Update()
     {
         mtext.text = RadioController.instance.numbers[numberOrder].ToString();
 
-        if(numberOrder == RadioController.instance.currentContrillingNumber)
-        {
-            mtext.color = Color.red;
+        if(numberOrder == RadioController.instance.currentControllingNumber) {  //when controlling a number
+            mtext.color = Color.red;                                            //make it red
         }
-        else
-        {
-            mtext.color = Color.black;
+        else {                                                                  //when not controlling a number 
+            mtext.color = Color.black;                                          //make it black
         }
     }
 }

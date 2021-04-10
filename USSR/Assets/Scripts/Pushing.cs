@@ -14,7 +14,6 @@ public class Pushing : MonoBehaviour
 
     // the gameobject which hold catching collider
     public Transform rotatePivot;
-    public GameObject player;
     public float xRotateAngles;
     public float yRotateAngles;
     public float zRotateAngles;
@@ -63,11 +62,8 @@ public class Pushing : MonoBehaviour
     {
         if (other.tag == "Player")                          //if the other object has the Player tag
         {
-            //catching.SetActive(true);
-            //Debug.Log("player enter and catch");
             if (Input.GetKeyDown(KeyCode.T) && canPush)                //and when the T key is pressed
             {
-                //GetCatchedCubes();
                 Debug.Log("start to push");
                 PushCaughtCubes();                          //run the PushCaughtCubes
             }
@@ -77,7 +73,6 @@ public class Pushing : MonoBehaviour
     // catching collider catch cubes
     public void GetCaughtCubes()
     {
-        
         foreach (var cube in allCubes)             //run foreach cube in the allCubes list
         {
             bool isCatched = cube.GetComponent<Cubes>().isCatched; //get the boolean value from the cube script
@@ -106,8 +101,7 @@ public class Pushing : MonoBehaviour
     public void ReleaseCaughtCubes() {
         catchedCubes.Clear();               //empty the catchedCubes list
     }
-    private void Update() { 
-        //Debug stuff
+    private void Update() { //Debug stuff
         Vector3 temp = rotatePivot.eulerAngles;
         xRotateAngles = temp.x;
         yRotateAngles = temp.y;
@@ -120,10 +114,5 @@ public class Pushing : MonoBehaviour
                 pushTimer = 0;
             }
         }
-    }
-
-    //this is not being used
-    public void SetIsRotate() {
-        isRotate = false;
     }
 }
