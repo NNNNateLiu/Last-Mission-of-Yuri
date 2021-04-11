@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -175,7 +175,7 @@ MonoBehaviour:
     value: 0.72
   color:
     overrideState: 1
-    value: {r: 0.04298683, g: 0.29767388, b: 0.4339623, a: 1}
+    value: {r: 0, g: 0.19009435, b: 0.2924528, a: 1}
   ambientOnly:
     overrideState: 1
     value: 1
