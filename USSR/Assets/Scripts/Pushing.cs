@@ -31,6 +31,7 @@ public class Pushing : MonoBehaviour
     public Material feedback;
     
     private bool isRotate = false;                      //variable to determine is the object was rotated
+
     private void Start()
     {
         catchingCollider = catching.GetComponent<Collider>();       //get the collider component
@@ -101,16 +102,29 @@ public class Pushing : MonoBehaviour
     public void ReleaseCaughtCubes() {
         catchedCubes.Clear();               //empty the catchedCubes list
     }
-    private void Update() { //Debug stuff
+
+    public void Level1RedGreenDoorOpenCheck()
+    {
+        if(Level1RedGreenDoor.instance.canOpen)
+        {
+            Level1RedGreenDoor.instance.stopToOpen = true;
+        }
+    }
+
+    private void Update()
+    { //Debug stuff
         Vector3 temp = rotatePivot.eulerAngles;
         xRotateAngles = temp.x;
         yRotateAngles = temp.y;
         zRotateAngles = temp.z;
 
-        if(!canPush) {
+        if (!canPush)
+        {
             pushTimer += Time.deltaTime;
-            if(pushTimer >= pushWaitTime) {
+            if (pushTimer >= pushWaitTime)
+            {
                 canPush = true;
+                Level1RedGreenDoorOpenCheck();
                 pushTimer = 0;
             }
         }

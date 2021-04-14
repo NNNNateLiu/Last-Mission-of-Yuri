@@ -27,6 +27,8 @@ public class CharacterMove : MonoBehaviour {
 
 	public bool isSetCubeAsParent; //level2: variable to decide whether player rotate with Cube
 
+	public bool isReading;
+
     private void Awake() {
 		instance = this;	//make this objects the instance
     }
@@ -57,13 +59,15 @@ public class CharacterMove : MonoBehaviour {
 		moveAmount = Vector3.SmoothDamp (moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 		
 		// run the Lock/unlock mouse function on click
-		if (Input.GetMouseButtonUp (0)) {
-			if (!cursorVisible) {
-				UnlockMouse ();
-			} else {
-				LockMouse ();
-			}
+		if(isReading)
+        {
+			UnlockMouse();
+        }
+		else
+        {
+			LockMouse();
 		}
+		
 	}
 
 	// update the rigidbody to move as you are giving input of movement

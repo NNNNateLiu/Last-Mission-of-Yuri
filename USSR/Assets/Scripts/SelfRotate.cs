@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class SelfRotate : MonoBehaviour
 {
-    public float rotateSpeed = 2f;
+    public float rotateSpeed = 4f;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(rotateSpeed * Time.deltaTime, rotateSpeed * Time.deltaTime, rotateSpeed * Time.deltaTime);
+        transform.Rotate(rotateSpeed * Time.deltaTime,0,0);
 ;    }
 }
