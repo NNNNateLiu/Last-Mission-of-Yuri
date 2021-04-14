@@ -20,7 +20,7 @@ public class StageTrigger : MonoBehaviour
         {
             Debug.Log("player");
             if(Input.GetKeyDown(KeyCode.T))
-            {
+            {  
                 StageController.instance.OnLevel1Finish();
             }
         }
