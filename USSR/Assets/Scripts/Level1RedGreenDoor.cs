@@ -11,6 +11,7 @@ public class Level1RedGreenDoor : MonoBehaviour
     public GameObject doorBlocker;
     public bool canOpen;
     public bool stopToOpen;
+    public AudioSource DoorOpen;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class Level1RedGreenDoor : MonoBehaviour
         greenDoor.transform.SetParent(doorRotatePivot.transform);
         doorBlocker.SetActive(false);
         doorRotatePivot.transform.DOLocalRotate(new Vector3(180, 0, 0), 3, RotateMode.Fast);
+        DoorOpen.GetComponent<AudioSource>().Play();
     }
 
     private void Update()
