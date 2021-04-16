@@ -31,6 +31,7 @@ public class Pushing : MonoBehaviour
     public Material feedback;
     
     private bool isRotate = false;                      //variable to determine is the object was rotated
+    public AudioSource RotateSound;
 
     private void Start()
     {
@@ -66,6 +67,7 @@ public class Pushing : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.T) && canPush)                //and when the T key is pressed
             {
                 Debug.Log("start to push");
+                RotateSound.GetComponent<AudioSource>().Play();
                 PushCaughtCubes();                          //run the PushCaughtCubes
             }
         }

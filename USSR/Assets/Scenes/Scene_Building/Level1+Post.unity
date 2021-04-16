@@ -34239,6 +34239,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: adc747e70d5719548b5704ca9eba18c9, type: 2}
     - target: {fileID: 3488725139357036509, guid: 6be5fcaccf32e024087492a9e0be5ad1,
         type: 3}
+      propertyPath: RotateSound
+      value: 
+      objectReference: {fileID: 179704672}
+    - target: {fileID: 3488725139357036509, guid: 6be5fcaccf32e024087492a9e0be5ad1,
+        type: 3}
       propertyPath: rotatePivot
       value: 
       objectReference: {fileID: 8785328584978565054}
@@ -34753,6 +34758,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bf7dfafd020da36439c464f05c4a4b8a, type: 2}
     - target: {fileID: 3488725139357036509, guid: 6be5fcaccf32e024087492a9e0be5ad1,
         type: 3}
+      propertyPath: RotateSound
+      value: 
+      objectReference: {fileID: 179704672}
+    - target: {fileID: 3488725139357036509, guid: 6be5fcaccf32e024087492a9e0be5ad1,
+        type: 3}
       propertyPath: rotatePivot
       value: 
       objectReference: {fileID: 8785328584978565054}
@@ -35064,6 +35074,11 @@ PrefabInstance:
       propertyPath: feedback
       value: 
       objectReference: {fileID: 2100000, guid: 6eb0a52e6168a7b41a6a9a00078a528b, type: 2}
+    - target: {fileID: 3488725139357036509, guid: 6be5fcaccf32e024087492a9e0be5ad1,
+        type: 3}
+      propertyPath: RotateSound
+      value: 
+      objectReference: {fileID: 179704672}
     - target: {fileID: 3488725139357036509, guid: 6be5fcaccf32e024087492a9e0be5ad1,
         type: 3}
       propertyPath: rotatePivot
