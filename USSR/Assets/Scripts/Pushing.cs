@@ -36,7 +36,8 @@ public class Pushing : MonoBehaviour
     private void Start()
     {
         catchingCollider = catching.GetComponent<Collider>();       //get the collider component
-        feedback.color = Color.grey;                                //set the color to grey as default color
+        feedback.color = Color.black;                                //set the color to grey as default color
+        feedback.SetColor("_EmissionColor",new Vector4(0,0.22f,0.18f,0));
     }
 
    
@@ -46,6 +47,7 @@ public class Pushing : MonoBehaviour
         {
             catching.SetActive(true);                       //activate catching
             feedback.DOColor(Color.green, 1);       //change the color to green
+            feedback.SetColor("_EmissionColor",new Vector4(0,0.75f,0.4f,-0.2f));
             GetCaughtCubes();                              //run the GetCaughtCubes function
         }
     }
@@ -55,7 +57,8 @@ public class Pushing : MonoBehaviour
         if (other.tag == "Player")                          //if the other object has the Player tag
         {
             catching.SetActive(false);                      //deactivate catching
-            feedback.DOColor(Color.grey, 1);        //change the color to the default color grey
+            feedback.DOColor(Color.black, 1);        //change the color to the default color grey
+            feedback.SetColor("_EmissionColor",new Vector4(0,0.22f,0.18f,0));
             ReleaseCaughtCubes();                          //run the ReleaseCaughtCubes function
         }
     }
