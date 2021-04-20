@@ -83,7 +83,7 @@ public class RadioController : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.P))             //after pressing p
+            if(Input.GetKeyDown(KeyCode.Return))             //after pressing p
             {
                 Debug.Log("play");
                 
@@ -122,7 +122,7 @@ public class RadioController : MonoBehaviour
                 if(isFocusing)
                 {
                     playerCam.transform.parent = player.transform;
-                    playerCam.transform.localPosition = Vector3.zero;
+                    playerCam.transform.localPosition = new Vector3 (0.0f,0.5f,0.0f);
                     playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                     CharacterMove.instance.walkSpeed = 10;
                     CharacterMove.instance.mouseSensitivity = 1;
