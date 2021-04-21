@@ -108,13 +108,13 @@ public class Pushing : MonoBehaviour
         catchedCubes.Clear();               //empty the catchedCubes list
     }
 
-    public void Level1RedGreenDoorOpenCheck()
-    {
-        if(Level1RedGreenDoor.instance.canOpen)
-        {
-            Level1RedGreenDoor.instance.stopToOpen = true;
-        }
-    }
+    // public void Level1RedGreenDoorOpenCheck()
+    // {
+    //     if(Level1RedGreenDoor.instance.canOpen)
+    //     {
+    //         Level1RedGreenDoor.instance.stopToOpen = true;
+    //     }
+    // }
 
     private void Update()
     { //Debug stuff
@@ -129,7 +129,7 @@ public class Pushing : MonoBehaviour
             if (pushTimer >= pushWaitTime)
             {
                 canPush = true;
-                Level1RedGreenDoorOpenCheck();
+               // Level1RedGreenDoorOpenCheck();
                 pushTimer = 0;
             }
         }
