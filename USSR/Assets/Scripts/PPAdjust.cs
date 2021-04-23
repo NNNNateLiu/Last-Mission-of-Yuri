@@ -7,6 +7,7 @@ public class PPAdjust : MonoBehaviour
 { public GameObject DoorTrigger;
   public GameObject SwitchPP;
   public GameObject OldPP;
+  public GameObject NewPP;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +17,14 @@ public class PPAdjust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(DoorTrigger.GetComponent<Level1RedGreenDoor>().stopToOpen){
+        if(DoorTrigger.GetComponent<Level1RedGreenDoor>().canOpen){
             SwitchPP.SetActive(true);
             OldPP.SetActive(false);
-
+            NewPP.SetActive(true);
+          }
+          else{
+            OldPP.SetActive(true);
+            NewPP.SetActive(false);
           }
         
     }
