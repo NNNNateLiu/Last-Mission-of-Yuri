@@ -8,6 +8,7 @@ public class PPAdjust : MonoBehaviour
   public GameObject SwitchPP;
   public GameObject OldPP;
   public GameObject NewPP;
+  public GameObject Light;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class PPAdjust : MonoBehaviour
             SwitchPP.SetActive(true);
             OldPP.SetActive(false);
             NewPP.SetActive(true);
+            Light.SetActive(true);
           }
           else{
             OldPP.SetActive(true);
