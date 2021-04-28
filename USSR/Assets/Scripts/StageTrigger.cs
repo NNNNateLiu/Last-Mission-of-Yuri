@@ -7,11 +7,27 @@ using DG.Tweening;
 public class StageTrigger : MonoBehaviour
 {
     public Material feedback;
+    public GameObject connectionDoor;
+    public GameObject doorCollider;
+
+    public float rotateTime;
+    public float rotateAngleX;
+    public float rotateAngleY;
+    public float rotateAngleZ;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")                          //if the other object has the Player tag
         { 
             feedback.DOColor(Color.red, 1);        //change the color to the default color grey                       //run the ReleaseCaughtCubes function
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")                          //if the other object has the Player tag
+        {
+            feedback.DOColor(Color.green, 1);        //change the color to the default color grey                       //run the ReleaseCaughtCubes function
         }
     }
     private void OnTriggerStay(Collider other)
@@ -20,8 +36,9 @@ public class StageTrigger : MonoBehaviour
         {
             Debug.Log("player");
             if(Input.GetKeyDown(KeyCode.T))
-            {  
-                StageController.instance.OnLevel1Finish();
+            {
+                doorCollider.SetActive(false);
+                connectionDoor.transform.DORotate(new Vector3(rotateAngleX, rotateAngleY, rotateAngleZ), rotateTime, RotateMode.Fast);
             }
         }
     }

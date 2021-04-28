@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
     //first level
 
 public class Level1_GameManager : MonoBehaviour
@@ -21,4 +22,15 @@ public class Level1_GameManager : MonoBehaviour
         innerCube.tag = "Untagged"; 
         outCube.tag = "cube";
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("reload");
+            SceneManager.LoadScene(1);
+        }
+    }
+
+
 }
