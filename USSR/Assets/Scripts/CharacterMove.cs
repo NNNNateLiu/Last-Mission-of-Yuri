@@ -29,7 +29,12 @@ public class CharacterMove : MonoBehaviour {
 
 	public bool isReading;
 
-    private void Awake() {
+	public GameObject currentGameobject;
+
+	public Transform cameraTransform;
+
+
+	private void Awake() {
 		instance = this;	//make this objects the instance
     }
     // Use this for initialization
@@ -37,6 +42,8 @@ public class CharacterMove : MonoBehaviour {
 		cameraT = Camera.main.transform;			//store the camara transform
 		rigidbodyR = GetComponent<Rigidbody> ();	//get the rigidbody component of the object
 		LockMouse ();								// run the LockMouse function
+
+
 	}
 	
 	// Update is called once per frame
@@ -67,12 +74,57 @@ public class CharacterMove : MonoBehaviour {
         {
 			LockMouse();
 		}
-		
+
+		if(Camera.main != null)
+        {
+			cameraTransform = Camera.main.transform;
+		}
+
+		RaycastHit hit;
+		Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+
+		if (Physics.Raycast(ray, out hit, 1f))
+		{
+			currentGameobject = hit.collider.gameObject;
+			Debug.DrawLine(ray.origin, hit.point);
+			if (currentGameobject.tag == "pushing")
+			{
+				currentGameobject.GetComponent<Pushing>().WhenPlayerEnter();
+				if (Input.GetKeyDown(KeyCode.E) && currentGameobject.GetComponent<Pushing>().canPush)
+				{
+					currentGameobject.GetComponent<Pushing>().PushCaughtCubes();
+				}
+			}
+			if(currentGameobject.tag == "radio")
+            {
+				if(Input.GetKeyDown(KeyCode.E))
+                {
+					currentGameobject.GetComponent<Level1ControlRadio>().ChangeRadioCameraState();
+				}
+            }
+		}
+		else
+		{
+			if(currentGameobject == null)
+            {
+				return;
+            }
+			if(currentGameobject.tag == "pushing")
+            {
+				currentGameobject.GetComponent<Pushing>().WhenPlayerExit();
+			}
+			currentGameobject = null;
+		}
 	}
 
 	// update the rigidbody to move as you are giving input of movement
 	void FixedUpdate() {
 		rigidbodyR.MovePosition (rigidbodyR.position + transform.TransformDirection (moveAmount) * Time.fixedDeltaTime);
+
+		
+
+		
+
 	}
 
 	//Unlock mouse and make it visible

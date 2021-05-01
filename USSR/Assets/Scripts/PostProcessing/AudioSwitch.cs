@@ -46,7 +46,7 @@ public class AudioSwitch : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.tag);
+        //Debug.Log(other.tag);
         if (other.tag == "Player")
         {
             isActive = true;
@@ -55,7 +55,7 @@ public class AudioSwitch : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.tag);
+        //Debug.Log(other.tag);
         if (other.tag=="Player")
         {
             isActive=false;

@@ -13,6 +13,8 @@ TagManager:
   - yellow4
   - yellow5
   - GreenDoor
+  - pushing
+  - radio
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - ground
   - SpaceShipWall
   - RedGreenDoor
-  - 
+  - pushing
   - 
   - 
   - 

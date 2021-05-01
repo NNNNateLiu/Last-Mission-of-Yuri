@@ -40,6 +40,7 @@ public class Level1RedGreenDoor : MonoBehaviour
         doorBlocker.SetActive(false);
         doorRotatePivot.transform.DOLocalRotate(new Vector3(180, 0, 0), 3, RotateMode.Fast);
         DoorOpen.GetComponent<AudioSource>().Play();
+        gameObject.GetComponent<PPAdjust>().SwitchPostProcessing();
     }
 
     private void Update()

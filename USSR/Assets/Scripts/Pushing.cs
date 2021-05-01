@@ -52,31 +52,32 @@ public class Pushing : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)              //when exiting the collider
-    {
-        if (other.tag == "Player")                          //if the other object has the Player tag
-        {
-            catching.SetActive(false);                      //deactivate catching
-            feedback.DOColor(Color.black, 1);        //change the color to the default color grey
-            feedback.SetColor("_EmissionColor",new Vector4(0,0.22f,0.18f,0));
-            ReleaseCaughtCubes();                          //run the ReleaseCaughtCubes function
-        }
-    }
+    //private void OnTriggerExit(Collider other)              //when exiting the collider
+    //{
+    //    if (other.tag == "Player")                          //if the other object has the Player tag
+    //    {
+    //        catching.SetActive(false);                      //deactivate catching
+    //        feedback.DOColor(Color.black, 1);        //change the color to the default color grey
+    //        feedback.SetColor("_EmissionColor",new Vector4(0,0.22f,0.18f,0));
+    //        ReleaseCaughtCubes();                          //run the ReleaseCaughtCubes function
+    //    }
+    //}
 
-    private void OnTriggerStay(Collider other)              //while colliding
-    {
-        if (other.tag == "Player")                          //if the other object has the Player tag
-        {
-            if (Input.GetKeyDown(KeyCode.T) && canPush)                //and when the T key is pressed
-            {
-                Debug.Log("start to push");
-                RotateSound.GetComponent<AudioSource>().Play();
-                PushCaughtCubes();                          //run the PushCaughtCubes
-            }
-        }
-    }
+    //private void OnTriggerStay(Collider other)              //while colliding
+    //{
+    //    if (other.tag == "Player")                          //if the other object has the Player tag
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.T) && canPush)                //and when the T key is pressed
+    //        {
+    //            Debug.Log("start to push");
+    //            RotateSound.GetComponent<AudioSource>().Play();
+    //            PushCaughtCubes();                          //run the PushCaughtCubes
+    //        }
+    //    }
+    //}
 
     // catching collider catch cubes
+
     public void GetCaughtCubes()
     {
         foreach (var cube in allCubes)             //run foreach cube in the allCubes list
@@ -104,16 +105,33 @@ public class Pushing : MonoBehaviour
         isRotate = true;    //set the object as rotated
     }
 
-    public void ReleaseCaughtCubes() {
+    public void ReleaseCaughtCubes() 
+    {
         catchedCubes.Clear();               //empty the catchedCubes list
     }
 
     public void Level1RedGreenDoorOpenCheck()
     {
-      if(Level1RedGreenDoor.instance.canOpen)
-      {
+        if(Level1RedGreenDoor.instance.canOpen)
+        {
          Level1RedGreenDoor.instance.stopToOpen = true;
-      }
+        }
+    }
+
+    public void WhenPlayerEnter()
+    {
+        catching.SetActive(true);                       //activate catching
+        feedback.DOColor(Color.green, 1);       //change the color to green
+        feedback.SetColor("_EmissionColor", new Vector4(0, 0.75f, 0.4f, -0.2f));
+        GetCaughtCubes();
+    }
+
+    public void WhenPlayerExit()
+    {
+        catching.SetActive(false);                      //deactivate catching
+        feedback.DOColor(Color.black, 1);        //change the color to the default color grey
+        feedback.SetColor("_EmissionColor", new Vector4(0, 0.22f, 0.18f, 0));
+        ReleaseCaughtCubes();
     }
 
     private void Update()

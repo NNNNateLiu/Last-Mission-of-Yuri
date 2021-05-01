@@ -8,6 +8,7 @@ public class RadioController : MonoBehaviour
     public static RadioController instance;
     public Rigidbody playerRigidbody;
 
+    public GameObject radioCam;
     public GameObject player;
     public GameObject playerCam;
     public Transform camPoint;
@@ -43,8 +44,6 @@ public class RadioController : MonoBehaviour
     {   //control the radio
         if (isFocusing) //when using the radio
         {
-            playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f); //camara lock to radio
-
             if(Input.GetKeyDown(KeyCode.UpArrow)) //after pressing the up arrow key 
             {
                 numbers[currentControllingNumber]++;        //add one to the current number
@@ -111,31 +110,23 @@ public class RadioController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if(isFocusing)
-            {
-                playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-            }
-            Debug.Log("player");
             if (Input.GetKeyDown(KeyCode.T))
             {
                 Debug.Log("staying");
                 if(isFocusing)
                 {
-                    playerCam.transform.parent = player.transform;
-                    playerCam.transform.localPosition = new Vector3 (0.0f,0.5f,0.0f);
-                    playerCam.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                    playerCam.SetActive(true);
+                    radioCam.SetActive(false);
                     CharacterMove.instance.walkSpeed = 10;
                     CharacterMove.instance.mouseSensitivity = 1;
-
 
                     playerRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                     isFocusing = false;
                 }
                 else
                 {
-                    playerCam.transform.parent = camPoint;
-                    playerCam.transform.position = camPoint.position;
-                    playerCam.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                    playerCam.SetActive(false);
+                    radioCam.SetActive(true);
                     CharacterMove.instance.walkSpeed = 0;
                     CharacterMove.instance.mouseSensitivity = 0;
 
