@@ -102,8 +102,16 @@ public class CharacterMove : MonoBehaviour {
 					currentGameobject.GetComponent<Level1ControlRadio>().ChangeRadioCameraState();
 				}
             }
-		}
-		else
+            if (currentGameobject.tag == "menu")
+            {
+                currentGameobject.GetComponent<ManualBook>().WhenPlayerEnter();
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    currentGameobject.GetComponent<ManualBook>().ChangeMenuUIState();
+                }
+            }
+        }
+		if(!Physics.Raycast(ray, out hit, 1f) || hit.collider.gameObject != currentGameobject)
 		{
 			if(currentGameobject == null)
             {
@@ -113,6 +121,10 @@ public class CharacterMove : MonoBehaviour {
             {
 				currentGameobject.GetComponent<Pushing>().WhenPlayerExit();
 			}
+            if(currentGameobject.tag == "menu")
+            {
+                currentGameobject.GetComponent<ManualBook>().WhenPlayerExit();
+            }
 			currentGameobject = null;
 		}
 	}

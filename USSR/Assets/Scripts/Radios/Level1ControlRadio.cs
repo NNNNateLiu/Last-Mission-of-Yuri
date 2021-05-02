@@ -105,7 +105,7 @@ public class Level1ControlRadio : MonoBehaviour
 
     public void ChangeRadioCameraState()
     {
-        Debug.Log("staying");
+        Debug.Log("player use control radio");
         if (isFocusing)
         {
             playerCam.SetActive(true);

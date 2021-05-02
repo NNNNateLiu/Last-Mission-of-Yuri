@@ -15,6 +15,7 @@ TagManager:
   - GreenDoor
   - pushing
   - radio
+  - menu
   layers:
   - Default
   - TransparentFX

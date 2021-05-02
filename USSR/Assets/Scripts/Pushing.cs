@@ -40,42 +40,6 @@ public class Pushing : MonoBehaviour
         feedback.SetColor("_EmissionColor",new Vector4(0,0.22f,0.18f,0));
     }
 
-   
-    private void OnTriggerEnter(Collider other)             //When the collider is triggered
-    {
-        if (other.tag == "Player")                          //if the other object has the Player tag
-        {
-            catching.SetActive(true);                       //activate catching
-            feedback.DOColor(Color.green, 1);       //change the color to green
-            feedback.SetColor("_EmissionColor",new Vector4(0,0.75f,0.4f,-0.2f));
-            GetCaughtCubes();                              //run the GetCaughtCubes function
-        }
-    }
-
-    //private void OnTriggerExit(Collider other)              //when exiting the collider
-    //{
-    //    if (other.tag == "Player")                          //if the other object has the Player tag
-    //    {
-    //        catching.SetActive(false);                      //deactivate catching
-    //        feedback.DOColor(Color.black, 1);        //change the color to the default color grey
-    //        feedback.SetColor("_EmissionColor",new Vector4(0,0.22f,0.18f,0));
-    //        ReleaseCaughtCubes();                          //run the ReleaseCaughtCubes function
-    //    }
-    //}
-
-    //private void OnTriggerStay(Collider other)              //while colliding
-    //{
-    //    if (other.tag == "Player")                          //if the other object has the Player tag
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.T) && canPush)                //and when the T key is pressed
-    //        {
-    //            Debug.Log("start to push");
-    //            RotateSound.GetComponent<AudioSource>().Play();
-    //            PushCaughtCubes();                          //run the PushCaughtCubes
-    //        }
-    //    }
-    //}
-
     // catching collider catch cubes
 
     public void GetCaughtCubes()
@@ -96,6 +60,7 @@ public class Pushing : MonoBehaviour
         foreach (var cube in catchedCubes) {          //run for each cube in the catchedCubes list
             cube.transform.SetParent(rotatePivot);             //set another transform as their parent 
         }
+        RotateSound.Play();
         //rotate the object
         rotatePivot.DORotate(new Vector3(xRotateAngles +xRotateModifyer, 
             yRotateAngles + yRotateModifyer,
