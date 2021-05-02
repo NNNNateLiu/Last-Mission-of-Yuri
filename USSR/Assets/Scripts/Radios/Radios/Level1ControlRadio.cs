@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Level1ControlRadio : Radio
 {
     public GameObject pushings;
+    public AudioSource correctCombo;
+    public AudioSource invalidCombo;
 
     public override void AfterPressEnter()
     {
@@ -15,6 +17,11 @@ public class Level1ControlRadio : Radio
             ChangeRadioCameraState();
             //just let it disappear for now
             gameObject.SetActive(false);
+            //play the active sound
+            correctCombo.Play();
+        }
+        else{
+            invalidCombo.Play();
         }
     }
 }
