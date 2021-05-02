@@ -14,6 +14,7 @@ public class StageTrigger : MonoBehaviour
     public float rotateAngleX;
     public float rotateAngleY;
     public float rotateAngleZ;
+    public AudioSource OpenAudio;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,7 +37,7 @@ public class StageTrigger : MonoBehaviour
         {
             Debug.Log("player");
             if(Input.GetKeyDown(KeyCode.T))
-            {
+            {   OpenAudio.Play();
                 doorCollider.SetActive(false);
                 connectionDoor.transform.DORotate(new Vector3(rotateAngleX, rotateAngleY, rotateAngleZ), rotateTime, RotateMode.Fast);
             }
