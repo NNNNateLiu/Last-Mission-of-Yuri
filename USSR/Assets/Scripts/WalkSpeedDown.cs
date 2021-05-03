@@ -25,7 +25,7 @@ public class WalkSpeedDown : MonoBehaviour
         if(isActive==true){
             Playerposition.GetComponent<CharacterMove>().walkSpeed=distance*8f;
             PlayerCamera.GetComponent<Camera>().fieldOfView=distance*95f;
-            Transit.GetComponent<Image>().color=new Color(251,255,239,0.03f/distance);
+            Transit.GetComponent<Image>().color=new Color(251,255,239,0.03f/distance-0.04f);
             if(distance<=0.035){
                 int i=SceneManager.GetActiveScene().buildIndex;
                 i=i+1;
