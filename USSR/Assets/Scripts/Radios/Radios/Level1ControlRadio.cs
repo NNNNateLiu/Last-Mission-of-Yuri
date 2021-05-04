@@ -8,6 +8,7 @@ public class Level1ControlRadio : Radio
     public GameObject pushings;
     public AudioSource correctCombo;
     public AudioSource invalidCombo;
+    public GameObject LightSource;
 
     public override void AfterPressEnter()
     {
@@ -19,6 +20,8 @@ public class Level1ControlRadio : Radio
             gameObject.SetActive(false);
             //play the active sound
             correctCombo.Play();
+            //Turnoff the light
+            LightSource.SetActive(false);
         }
         else{
             invalidCombo.Play();
