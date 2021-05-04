@@ -109,6 +109,14 @@ public class CharacterMove : MonoBehaviour
                     currentGameobject.GetComponent<ManualBook>().ChangeMenuUIState();
                 }
             }
+            if(currentGameobject.tag == "level2statetrigger")
+            {
+                currentGameobject.GetComponent<StageTrigger>().WhenPlayerEnter();
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    currentGameobject.GetComponent<StageTrigger>().OnInteract();
+                }
+            }
         }
         if (!Physics.Raycast(ray, out hit, 1f) || hit.collider.gameObject != currentGameobject)
         {
@@ -123,6 +131,10 @@ public class CharacterMove : MonoBehaviour
             if (currentGameobject.tag == "menu")
             {
                 currentGameobject.GetComponent<ManualBook>().WhenPlayerExit();
+            }
+            if (currentGameobject.tag == "level2statetrigger")
+            {
+                currentGameobject.GetComponent<StageTrigger>().WhenPlayerExit();
             }
             currentGameobject = null;
         }

@@ -16,6 +16,7 @@ TagManager:
   - pushing
   - radio
   - menu
+  - level2statetrigger
   layers:
   - Default
   - TransparentFX

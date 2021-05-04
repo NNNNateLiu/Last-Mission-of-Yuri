@@ -14,9 +14,9 @@ public class Pushing : MonoBehaviour
 
     // the gameobject which hold catching collider
     public Transform rotatePivot;
-    public float xRotateAngles;
-    public float yRotateAngles;
-    public float zRotateAngles;
+    private float xRotateAngles;
+    private float yRotateAngles;
+    private float zRotateAngles;
 
     //Create list to group up the active cubes
     public List<GameObject> catchedCubes;
