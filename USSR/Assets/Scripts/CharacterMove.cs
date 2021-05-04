@@ -54,7 +54,6 @@ public class CharacterMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        verticalInput = Input.GetAxisRaw("Vertical");
 
         // Move camera depending on the the mouse position
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivity);
@@ -63,7 +62,7 @@ public class CharacterMove : MonoBehaviour
         cameraT.localEulerAngles = Vector3.left * verticalLookRotation;
 
         // Control the movement of the player, direction and speed
-        Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, verticalInput).normalized;
+        Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         Vector3 targetMoveAmount = moveDir * walkSpeed;
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
