@@ -82,7 +82,7 @@ public class CharacterMove : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
 
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 2f))
         {
             currentGameobject = hit.collider.gameObject;
             Debug.DrawLine(ray.origin, hit.point);
