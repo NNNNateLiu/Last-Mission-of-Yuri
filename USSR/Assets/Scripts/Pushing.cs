@@ -14,9 +14,9 @@ public class Pushing : MonoBehaviour
 
     // the gameobject which hold catching collider
     public Transform rotatePivot;
-    private float xRotateAngles;
-    private float yRotateAngles;
-    private float zRotateAngles;
+    public float xRotateAngles;
+    public float yRotateAngles;
+    public float zRotateAngles;
 
     //Create list to group up the active cubes
     public List<GameObject> catchedCubes;
@@ -60,7 +60,7 @@ public class Pushing : MonoBehaviour
         foreach (var cube in catchedCubes) {          //run for each cube in the catchedCubes list
             cube.transform.SetParent(rotatePivot);             //set another transform as their parent 
         }
-        RotateSound.Play();
+        //RotateSound.Play();
         //rotate the object
         rotatePivot.DORotate(new Vector3(xRotateAngles +xRotateModifyer, 
             yRotateAngles + yRotateModifyer,
@@ -77,10 +77,15 @@ public class Pushing : MonoBehaviour
 
     public void Level1RedGreenDoorOpenCheck()
     {
-        if(Level1RedGreenDoor.instance.canOpen)
+        if(Level1RedGreenDoor.instance == null)
         {
-         Level1RedGreenDoor.instance.stopToOpen = true;
+            return;
         }
+        if (Level1RedGreenDoor.instance.canOpen)
+        {
+            Level1RedGreenDoor.instance.stopToOpen = true;
+        }
+
     }
 
     public void WhenPlayerEnter()
@@ -88,7 +93,7 @@ public class Pushing : MonoBehaviour
         catching.SetActive(true);                       //activate catching
         feedback.DOColor(Color.green, 1);       //change the color to green
         feedback.SetColor("_EmissionColor", new Vector4(0, 0.75f, 0.4f, -0.2f));
-        GetCaughtCubes();
+        //GetCaughtCubes();
     }
 
     public void WhenPlayerExit()

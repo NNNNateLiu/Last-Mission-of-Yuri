@@ -26,7 +26,7 @@ public class StageTrigger : MonoBehaviour
         feedback.DOColor(Color.green, 1);
     }
 
-    public void OnInteract()
+    public virtual void OnInteract()
     {
         OpenAudio.Play();
         doorCollider.SetActive(false);
