@@ -270,3 +270,4 @@ Material:
     - _ReflectionColor: {r: 0.6836073, g: 0.7968859, b: 0.85294116, a: 1}
     - _ShallowColor: {r: 0, g: 0.47932065, b: 0.5000113, a: 0.478}
     - _WaterColor: {r: 0, g: 0.4601992, b: 0.55147594, a: 1}
+  m_BuildTextureStacks: []
