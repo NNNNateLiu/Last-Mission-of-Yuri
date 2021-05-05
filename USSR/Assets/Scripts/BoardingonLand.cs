@@ -21,8 +21,12 @@ public class BoardingonLand : MonoBehaviour
             PlayerPosition.GetComponent<Animator>().enabled=false;
         }
         if(isActive==true){
-            if(Input.GetKey(KeyCode.W)||Input.GetKeyDown(KeyCode.A)||Input.GetKey(KeyCode.S)||Input.GetKeyDown(KeyCode.D)){
+            if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.D)){
                 walkSound.Play();
+            }
+            else
+            {
+                walkSound.Pause();
             }
         }
         
