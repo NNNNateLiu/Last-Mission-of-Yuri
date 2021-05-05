@@ -60,7 +60,7 @@ public class Pushing : MonoBehaviour
         foreach (var cube in catchedCubes) {          //run for each cube in the catchedCubes list
             cube.transform.SetParent(rotatePivot);             //set another transform as their parent 
         }
-        //RotateSound.Play();
+         RotateSound.Play();
         //rotate the object
         rotatePivot.DORotate(new Vector3(xRotateAngles +xRotateModifyer, 
             yRotateAngles + yRotateModifyer,
