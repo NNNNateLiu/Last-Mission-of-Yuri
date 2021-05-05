@@ -38,7 +38,7 @@ public class Level1RedGreenDoor : MonoBehaviour
     {
         greenDoor.transform.SetParent(doorRotatePivot.transform);
         doorBlocker.SetActive(false);
-        doorRotatePivot.transform.DOLocalRotate(new Vector3(180, 0, 0), 3, RotateMode.Fast);
+        doorRotatePivot.transform.DOLocalRotate(new Vector3(180, 0, 0), 8, RotateMode.Fast);
         DoorOpen.GetComponent<AudioSource>().Play();
         gameObject.GetComponent<PPAdjust>().SwitchPostProcessing();
     }
