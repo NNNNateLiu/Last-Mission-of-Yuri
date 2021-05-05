@@ -18,7 +18,7 @@ public class BoardingonLand : MonoBehaviour
     void Update()
     {
         if(Time.timeSinceLevelLoad>boardingtime){
- //           PlayerPosition.GetComponent<Animator>().enabled=false;
+          PlayerPosition.GetComponent<Animator>().enabled=false;
         }
         if(isActive==true){
             if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.D)){
