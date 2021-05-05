@@ -70,6 +70,11 @@ public class UI : MonoBehaviour
     public void soundcontrol(float value){
         audioMixer.SetFloat("SoundVolume",value);
     }
+
+     public void EndGame(){
+
+         Application.Quit();
+    }
     
 }
 
