@@ -13,16 +13,19 @@ public class Radio : MonoBehaviour
     public GameObject playerCam;
     public Transform camPoint;
 
-    //matches that play music
+    //matches that something should happen
     public string rightCombo;
+    //indicate which number is controllig
     public List<int> numbers;
+    //turn 3 text number into a string
     public string currentCombo;
 
     public int currentControllingNumber = 0;
     public bool isFocusing;
 
-    private Vector3 standardRotate;
-    private AudioSource maudio;
+    public AudioSource maudio;
+    public AudioSource invalidCombo;
+    public AudioSource correctCombo;
 
     // Start is called before the first frame update
     void Start()
@@ -112,5 +115,10 @@ public class Radio : MonoBehaviour
     public virtual void AfterPressEnter()
     {
         
+    }
+
+    public virtual void AfterEnterCorrectStuff()
+    {
+
     }
 }

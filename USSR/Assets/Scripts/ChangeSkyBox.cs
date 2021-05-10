@@ -7,6 +7,7 @@ public class ChangeSkyBox : MonoBehaviour
 
     public bool isActive;
     public Material SkyboxUpdate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +17,16 @@ public class ChangeSkyBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isActive==true){
+        if(isActive==true)
+        {
             RenderSettings.skybox=SkyboxUpdate; 
-
         }
     }
-    private void OnTriggerEnter(Collider other){
+    private void OnTriggerEnter(Collider other)
+    {
 
-        if(other.tag=="Player"){
-
+        if(other.tag=="Player")
+        {
             isActive=true;
         }
     }

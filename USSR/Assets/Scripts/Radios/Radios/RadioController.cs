@@ -7,11 +7,7 @@ public class RadioController : Radio
 {
 
     //matches that play music
-    public List<string> combos;
-    public List<AudioClip> music;
-    public List<string> titles;
-
-    private AudioSource maudio;
+    public List<Music> music;
 
     public Text panel;
     // Start is called before the first frame update
@@ -22,15 +18,18 @@ public class RadioController : Radio
 
     public override void AfterPressEnter()
     {
-        for (var i = 0; i < combos.Count; i++)
+        for (var i = 0; i < music.Count; i++)
         {
-            if (combos[i] == currentCombo)
+            if (music[i].cambos == currentCombo)
             {
                 Debug.Log("now playing: " + music[i]);
-                maudio.clip = music[i];
+                maudio.clip = music[i].music;
                 maudio.Play();
-                panel.text = titles[i];
                 break;
+            }
+            else
+            {
+                invalidCombo.Play();
             }
         }
     }

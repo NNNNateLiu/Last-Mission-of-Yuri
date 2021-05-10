@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class Level1ControlRadio : Radio
 {
     public GameObject pushings;
-    public AudioSource correctCombo;
-    public AudioSource invalidCombo;
     public GameObject LightSource;
 
     public override void AfterPressEnter()
