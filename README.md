@@ -21,3 +21,9 @@ Next time when you add something in the project, try to put them in their own so
 ----------------------------------------
 
 20210304
+
+
+Scripts are for Nate's Code Lab 1 final project 
+----------------------------------------
+
+20210516
